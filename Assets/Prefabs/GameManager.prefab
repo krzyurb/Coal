@@ -59,6 +59,15 @@ MonoBehaviour:
   - {fileID: 1293695445011188, guid: 6aff820d499864380910240244a07813, type: 2}
   wallTiles:
   - {fileID: 1686205553828870, guid: 30186b6be85eb412296b020f82b32d9e, type: 2}
+  - {fileID: 1139073422995814, guid: ef6e698da4c3241a78482ceed2a2864e, type: 2}
+  - {fileID: 1688548774047982, guid: c19b0455132634399a5f8ecb39f39772, type: 2}
+  - {fileID: 1873542366747414, guid: 6980d57ca245247778eb0adcf6806217, type: 2}
+  gateTiles:
+  - {fileID: 1357340313686300, guid: e6004ec5646e24e88b3d94bb83e413e0, type: 2}
+  - {fileID: 1934530320372794, guid: acc46aec7c84d4cf699f54e4df234524, type: 2}
+  - {fileID: 1500989139890884, guid: b28700fe6c0aa41938c7c77aac4e5755, type: 2}
+  trackTiles:
+  - {fileID: 1578635341513442, guid: 1e299849e8a464e7a84c7478bdd94369, type: 2}
 --- !u!114 &114979963406057122
 MonoBehaviour:
   m_ObjectHideFlags: 1

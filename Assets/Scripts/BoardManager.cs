@@ -22,6 +22,8 @@ public class BoardManager : MonoBehaviour {
 
 	public GameObject[] floorTiles;
 	public GameObject[] wallTiles;
+	public GameObject[] gateTiles;
+	public GameObject[] trackTiles;
 
 	private Transform boardHolder;
 	private List <Vector3> gridPositions = new List<Vector3>();
@@ -48,13 +50,9 @@ public class BoardManager : MonoBehaviour {
 				}
 
 				if (y == rows) { // dodawanie bramy
-					if (x == columns - 3) toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)]; // brama lewa
-					if (x == columns - 2) toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)]; // brama środek
-					if (x == columns - 1) toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)]; // brama prawa
-				}
-
-				if (x == columns - 2) { // dodawanie torów
-					if ((rows - y) > 0 && (rows - y) < 7) toInstantiate = wallTiles[Random.Range(0,wallTiles.Length)];
+					if (x == columns - 3) toInstantiate = gateTiles [0]; // brama lewa
+					if (x == columns - 2) toInstantiate = gateTiles [1]; // brama środek
+					if (x == columns - 1) toInstantiate = gateTiles [2]; // brama prawa
 				}
 
 				GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity);
@@ -68,6 +66,14 @@ public class BoardManager : MonoBehaviour {
 		Vector3 randomPosition = gridPositions [randomIndex];
 		gridPositions.RemoveAt (randomIndex);
 		return randomPosition;
+	}
+
+	void TracksAtTop () {
+		for (int y = 0; y < rows + 1; y++) {
+			if ((rows - y) > 0 && (rows - y) < 7) {
+				Instantiate (trackTiles [Random.Range (0, trackTiles.Length)], new Vector3 (columns - 2, y, 0f), Quaternion.identity);
+			}
+		}
 	}
 
 	void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum) {
@@ -84,5 +90,6 @@ public class BoardManager : MonoBehaviour {
 	public void SetupScene(int level) {
 		BoardSetup ();
 		InitialiseList ();
+		TracksAtTop ();
 	}
 }
