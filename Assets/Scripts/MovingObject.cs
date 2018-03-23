@@ -19,22 +19,42 @@ public abstract class MovingObject : MonoBehaviour {
 
 	}
 
-    protected bool Move(int xDir, int yDir, out RaycastHit2D hit)
-    {
-        Vector2 start = transform.position;
-        Vector2 end = start + new Vector2(xDir, yDir);
+	protected bool Move (int xDir, int yDir, out RaycastHit2D hit, bool checkAndMove) {
+		Vector2 start = transform.position;
+		Vector2 end = start + new Vector2 (xDir, yDir);
 
-        boxCollider.enabled = false;
-        hit = Physics2D.Linecast(start, end, blockingLayer);
-        boxCollider.enabled = true;
+		float startX = start.x;
+		float endX = end.x;
 
-        if(hit.transform == null)
-        {
-            StartCoroutine(SmoothMovement(end));
-            return true;
-        }
-        return false;
-    }
+		SpriteRenderer mySpriteRenderer = GetComponent <SpriteRenderer> ();
+		Player playerScript = GetComponent <Player> ();
+		Enemy enemyScript = GetComponent <Enemy> ();
+
+		if (playerScript != null && enemyScript == null) {
+			if (endX < startX && mySpriteRenderer != null) {
+				mySpriteRenderer.flipX = true;
+			} else if (endX > startX && mySpriteRenderer != null) {
+				mySpriteRenderer.flipX = false;
+			}
+		} else if (enemyScript != null && playerScript == null) {
+			if (endX < startX && mySpriteRenderer != null) {
+				mySpriteRenderer.flipX = false;
+			} else if (endX > startX && mySpriteRenderer != null) {
+				mySpriteRenderer.flipX = true;
+			}
+		}
+
+		boxCollider.enabled = false;
+		hit = Physics2D.Linecast (start, end, blockingLayer);
+		boxCollider.enabled = true;
+
+		if (hit.transform == null && checkAndMove) {
+			StartCoroutine (SmoothMovement (end));
+			return true;
+		}
+
+		return false;
+	}
 
 	protected IEnumerator SmoothMovement(Vector3 end) {
 		float sqrRemainDistance = (transform.position - end).sqrMagnitude;
@@ -50,7 +70,7 @@ public abstract class MovingObject : MonoBehaviour {
           where T : Component
     {
         RaycastHit2D hit;
-        bool canMove = Move(xDir, yDir, out hit);
+        bool canMove = Move(xDir, yDir, out hit, true);
 
         if (hit.transform == null)
             return;

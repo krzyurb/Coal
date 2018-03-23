@@ -27,12 +27,14 @@ public class BoardManager : MonoBehaviour {
 	public GameObject   centerGateTile;
 	public GameObject   rightGateTile;
 
-	public GameObject  coal;
-
+	public GameObject   coal;
+	public GameObject   enemy;
 	public GameObject   trackTile;
 
 	public GameObject   railCarUp;
 	public GameObject   railCarDown;
+
+
 
 	private Transform boardHolder;
 	private List <Vector3> gridPositions = new List<Vector3>();
@@ -119,5 +121,8 @@ public class BoardManager : MonoBehaviour {
 		CarAtTop ();
 
 		ObjectAtRandom (coal, 1, 10);
+
+		ObjectAtRandom (enemy, 1, 10);
+
 	}
 }
