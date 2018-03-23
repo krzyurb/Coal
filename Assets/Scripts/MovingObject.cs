@@ -35,16 +35,7 @@ public abstract class MovingObject : MonoBehaviour {
         }
         return false;
     }
-
-	protected IEnumerator SmoothMovement(Vector3 end) {
-		float sqrRemainDistance = (transform.position - end).sqrMagnitude;
-		while (sqrRemainDistance > float.Epsilon) {
-			Vector3 newposition = Vector3.MoveTowards (rb2D.position, end, inverseMoveTime * Time.deltaTime);
-			rb2D.MovePosition(newposition);
-			sqrRemainDistance = (transform.position - end).sqrMagnitude;
-			yield return null;
-		}
-	}
+		
 
     protected virtual void AttemptMove <T> (int xDir, int yDir)
           where T : Component
@@ -59,7 +50,6 @@ public abstract class MovingObject : MonoBehaviour {
         if(!canMove && hitComponent != null)
             OnCantMove(hitComponent);
         
-
     }
 
     protected abstract void OnCantMove<T>(T component)
