@@ -27,6 +27,8 @@ public class BoardManager : MonoBehaviour {
 	public GameObject   centerGateTile;
 	public GameObject   rightGateTile;
 
+	public GameObject  coal;
+
 	public GameObject   trackTile;
 
 	private Transform boardHolder;
@@ -37,7 +39,9 @@ public class BoardManager : MonoBehaviour {
 
 		for (int x = 1; x < columns - 1; x++) {
 			for (int y = 1; y < rows - 1; y++) {
-				gridPositions.Add (new Vector3 (x, y, 0f));
+				if (x == columns - 2 && ((rows - y) > 0 && (rows - y) < 7)) { }
+				else
+					gridPositions.Add (new Vector3 (x, y, 0f));
 			}
 		}
 	}
@@ -80,6 +84,15 @@ public class BoardManager : MonoBehaviour {
 		}
 	}
 
+	void ObjectAtRandom(GameObject tile, int minimum, int maximum) {
+		int objectCount = Random.Range (minimum, maximum + 1);
+
+		for(int i = 0; i < objectCount; i++) {
+			Vector3 randomPosition = RandomPositions();
+			Instantiate (tile, randomPosition, Quaternion.identity);
+		}		
+	}
+
 	void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum) {
 		int objectCount = Random.Range (minimum, maximum + 1);
 
@@ -94,5 +107,7 @@ public class BoardManager : MonoBehaviour {
 		BoardSetup ();
 		InitialiseList ();
 		TracksAtTop ();
+
+		ObjectAtRandom (coal, 1, 10);
 	}
 }
