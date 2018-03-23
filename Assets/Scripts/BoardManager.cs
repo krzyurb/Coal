@@ -71,7 +71,6 @@ public class BoardManager : MonoBehaviour {
 			Vector3 randomPosition = RandomPositions();
 			GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
 			Instantiate (tileChoice, randomPosition, Quaternion.identity);
-
 		}
 	}
 
