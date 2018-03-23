@@ -15,6 +15,7 @@ public class Player : MovingObject {
     protected override void Start () {
         animator = GetComponent<Animator>();
         food = GameManager.instance.playerFoodPoints;
+		base.Start ();
 	}
 
     private void OnDisable()
@@ -25,8 +26,8 @@ public class Player : MovingObject {
 
     // Update is called once per frame
     void Update () {
-        if (!GameManager.instance.playersTurn)
-            return;
+//        if (!GameManager.instance.playersTurn)
+//            return;
 
         int horizontal = 0;
         int vertical = 0;
