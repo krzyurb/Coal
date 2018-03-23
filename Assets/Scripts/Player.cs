@@ -11,8 +11,7 @@ public class Player : MovingObject {
 	private Animator animator;
 	private int food;
 
-	private bool isVer = false;
-	private bool isHor = false;
+	private bool isPressed = false;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -27,7 +26,6 @@ public class Player : MovingObject {
 //		GameManager.instance.playerFoodPoints = food;
 	}
 
-	// Update is called once per frame
 	void Update () {
 
 		int horizontal = 0;
@@ -39,19 +37,14 @@ public class Player : MovingObject {
 		if (horizontal != 0)
 			vertical = 0;
 
-		if (!isHor && horizontal != 0 && vertical == 0) {
-			isHor = true;
-			transform.position += new Vector3 ((horizontal > 0) ? 1f : -1f, 0f, 0f);
-		}
+		if (!isPressed && (horizontal != 0 || vertical != 0)) {
+			isPressed = true;
+			AttemptMove<Wall> (horizontal, vertical);
 
-		if (!isVer && horizontal == 0 && vertical != 0) {
-			isVer = true;
-			transform.position += new Vector3 (0f, (vertical > 0) ? 1f : -1f, 0f);
 		}
 
 		if (horizontal == 0 && vertical == 0) {
-			isHor = false;
-			isVer = false;
+			isPressed = false;
 		}
 	}
 
