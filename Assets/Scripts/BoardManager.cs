@@ -19,12 +19,15 @@ public class BoardManager : MonoBehaviour {
 
 	public int columns = 8;
 	public int rows    = 8;
-	public Count wallCount = new Count(5,9);
-	public Count foodCount = new Count(1,5);
-	public GameObject exit;
-	public GameObject[] floorTiles;
+
+	public GameObject   floorTile;
 	public GameObject[] wallTiles;
-	public GameObject[] outerTiles;
+
+	public GameObject   leftGateTile;
+	public GameObject   centerGateTile;
+	public GameObject   rightGateTile;
+
+	public GameObject   trackTile;
 
 	private Transform boardHolder;
 	private List <Vector3> gridPositions = new List<Vector3>();
@@ -44,17 +47,22 @@ public class BoardManager : MonoBehaviour {
 
 		for (int x = -1; x < columns + 1; x++) {
 			for (int y = -1; y < rows + 1; y++) {
-				GameObject toInstantiate = floorTiles[Random.Range(0,floorTiles.Length)];
+				GameObject toInstantiate = floorTile;
+
 				if (x == -1 || x == columns || y == -1 || y == rows) {
-					toInstantiate = outerTiles[Random.Range(0,outerTiles.Length)];
+					toInstantiate = wallTiles[Random.Range(0,wallTiles.Length)];
+				}
+
+				if (y == rows) { // dodawanie bramy
+					if (x == columns - 3) toInstantiate = leftGateTile; // brama lewa
+					if (x == columns - 2) toInstantiate = centerGateTile; // brama środek
+					if (x == columns - 1) toInstantiate = rightGateTile; // brama prawa
 				}
 
 				GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity);
 				instance.transform.SetParent(boardHolder);
 			}
 		}
-
-
 	}
 
 	Vector3 RandomPositions () {
@@ -62,6 +70,14 @@ public class BoardManager : MonoBehaviour {
 		Vector3 randomPosition = gridPositions [randomIndex];
 		gridPositions.RemoveAt (randomIndex);
 		return randomPosition;
+	}
+
+	void TracksAtTop () {
+		for (int y = 0; y < rows + 1; y++) {
+			if ((rows - y) > 0 && (rows - y) < 7) {
+				Instantiate (trackTile, new Vector3 (columns - 2, y, 0f), Quaternion.identity);
+			}
+		}
 	}
 
 	void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum) {
@@ -77,7 +93,6 @@ public class BoardManager : MonoBehaviour {
 	public void SetupScene(int level) {
 		BoardSetup ();
 		InitialiseList ();
-		LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
-
+		TracksAtTop ();
 	}
 }
