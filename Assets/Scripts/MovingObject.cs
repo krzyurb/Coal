@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class NewBehaviourScript : MonoBehaviour {
+public abstract class MovingObject : MonoBehaviour {
 
 	public float moveTime = 0.1f;
 	public LayerMask blockingLayer;
