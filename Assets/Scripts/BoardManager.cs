@@ -42,8 +42,19 @@ public class BoardManager : MonoBehaviour {
 		for (int x = -1; x < columns + 1; x++) {
 			for (int y = -1; y < rows + 1; y++) {
 				GameObject toInstantiate = floorTiles[Random.Range(0,floorTiles.Length)];
+
 				if (x == -1 || x == columns || y == -1 || y == rows) {
 					toInstantiate = wallTiles[Random.Range(0,wallTiles.Length)];
+				}
+
+				if (y == rows) { // dodawanie bramy
+					if (x == columns - 3) toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)]; // brama lewa
+					if (x == columns - 2) toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)]; // brama środek
+					if (x == columns - 1) toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)]; // brama prawa
+				}
+
+				if (x == columns - 2) { // dodawanie torów
+					if ((rows - y) > 0 && (rows - y) < 7) toInstantiate = wallTiles[Random.Range(0,wallTiles.Length)];
 				}
 
 				GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity);
