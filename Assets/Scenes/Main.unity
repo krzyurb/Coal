@@ -208,3 +208,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1203305546637204, guid: 339513129eeae47949deb2bace8d93d3,
     type: 2}
+--- !u!1001 &1399801967
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4325453232389022, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325453232389022, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325453232389022, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325453232389022, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325453232389022, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325453232389022, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325453232389022, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325453232389022, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
+  m_IsPrefabParent: 0
