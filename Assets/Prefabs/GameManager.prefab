@@ -68,6 +68,9 @@ MonoBehaviour:
     type: 2}
   coal: {fileID: 1345433351701768, guid: 01de35d029f3b4a08b748cbc9e6afd89, type: 2}
   trackTile: {fileID: 1578635341513442, guid: 1e299849e8a464e7a84c7478bdd94369, type: 2}
+  railCarUp: {fileID: 1109321101605594, guid: bfccaa3c98e2c4feb9a42ad77e6afaa9, type: 2}
+  railCarDown: {fileID: 1614076668481244, guid: b64035849f8c845aab71976eef8b8312,
+    type: 2}
 --- !u!114 &114979963406057122
 MonoBehaviour:
   m_ObjectHideFlags: 1

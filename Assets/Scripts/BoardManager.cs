@@ -31,6 +31,9 @@ public class BoardManager : MonoBehaviour {
 
 	public GameObject   trackTile;
 
+	public GameObject   railCarUp;
+	public GameObject   railCarDown;
+
 	private Transform boardHolder;
 	private List <Vector3> gridPositions = new List<Vector3>();
 
@@ -84,6 +87,11 @@ public class BoardManager : MonoBehaviour {
 		}
 	}
 
+	void CarAtTop () {
+		Instantiate (railCarUp,  new Vector3 (columns - 2, (rows - 2), 0f), Quaternion.identity);
+		Instantiate (railCarDown, new Vector3 (columns - 2, (rows - 3), 0f), Quaternion.identity);
+	}
+
 	void ObjectAtRandom(GameObject tile, int minimum, int maximum) {
 		int objectCount = Random.Range (minimum, maximum + 1);
 
@@ -106,7 +114,9 @@ public class BoardManager : MonoBehaviour {
 	public void SetupScene(int level) {
 		BoardSetup ();
 		InitialiseList ();
+
 		TracksAtTop ();
+		CarAtTop ();
 
 		ObjectAtRandom (coal, 1, 10);
 	}
