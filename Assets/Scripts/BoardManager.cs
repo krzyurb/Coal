@@ -19,12 +19,9 @@ public class BoardManager : MonoBehaviour {
 
 	public int columns = 8;
 	public int rows    = 8;
-	public Count wallCount = new Count(5,9);
-	public Count foodCount = new Count(1,5);
-	public GameObject exit;
+
 	public GameObject[] floorTiles;
 	public GameObject[] wallTiles;
-	public GameObject[] outerTiles;
 
 	private Transform boardHolder;
 	private List <Vector3> gridPositions = new List<Vector3>();
@@ -46,15 +43,13 @@ public class BoardManager : MonoBehaviour {
 			for (int y = -1; y < rows + 1; y++) {
 				GameObject toInstantiate = floorTiles[Random.Range(0,floorTiles.Length)];
 				if (x == -1 || x == columns || y == -1 || y == rows) {
-					toInstantiate = outerTiles[Random.Range(0,outerTiles.Length)];
+					toInstantiate = wallTiles[Random.Range(0,wallTiles.Length)];
 				}
 
 				GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity);
 				instance.transform.SetParent(boardHolder);
 			}
 		}
-
-
 	}
 
 	Vector3 RandomPositions () {
@@ -70,15 +65,13 @@ public class BoardManager : MonoBehaviour {
 		for(int i = 0; i < objectCount; i++) {
 			Vector3 randomPosition = RandomPositions();
 			GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
-			Instantiate (tileChoice, randomPosition, Quaternion.identity);
 
+			Instantiate (tileChoice, randomPosition, Quaternion.identity);
 		}
 	}
 
 	public void SetupScene(int level) {
 		BoardSetup ();
 		InitialiseList ();
-		LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
-
 	}
 }
