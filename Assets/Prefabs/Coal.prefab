@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e2c77096111024f832271db4a14ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmgSprite: {fileID: 0}
+  damageSpriteCoal: {fileID: 21300014, guid: 5896c149752844ed7af06cb2fd592e3d, type: 3}
   hp: 2
 --- !u!212 &212786667052272076
 SpriteRenderer:

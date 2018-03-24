@@ -24,6 +24,10 @@ TextureImporter:
     21300034: elementy-sprite_17
     21300036: elementy-sprite_18
     21300038: elementy-sprite_19
+    21300040: elementy-sprite_20
+    21300042: elementy-sprite_21
+    21300044: elementy-sprite_22
+    21300046: elementy-sprite_23
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -381,6 +385,62 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: elementy-sprite_20
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: elementy-sprite_21
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: elementy-sprite_22
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: elementy-sprite_23
+      rect:
+        serializedVersion: 2
+        x: 896
         y: 640
         width: 128
         height: 128

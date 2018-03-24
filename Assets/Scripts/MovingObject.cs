@@ -84,19 +84,16 @@ public abstract class MovingObject : MonoBehaviour {
 		Wall wallComponent = hit.transform.GetComponent <Wall> ();
 
 		if (!canMove && hitCoal != null && enemyComponent == null) {
-            Debug.Log("Cant move because of Coal");
 			OnCantMove (hitCoal);
 		}
-        /*
+        
 		if (!canMove && myEnemyComponent != null && wallComponent != null) {
-            //Debug.Log("Enemy Cant move because of wall");
             EnemyHitWall (wallComponent);
 		}
 
 		if (!canMove && myComponent != null && enemyComponent != null) {
 			EnemyAttack (enemyComponent);
 		}
-        */
 	}
 
 	protected abstract void OnCantMove <T> (T component)
