@@ -55,6 +55,7 @@ public class Player : MovingObject {
 		base.AttemptMove<T>(xDir, yDir);
 		RaycastHit2D hit;
 		CheckIfGameOver();
+        //CheckIfUserLevelUp(); // init game with new level, enlarge scene
 //		GameManager.instance.playersTurn = false;
 	}
 
