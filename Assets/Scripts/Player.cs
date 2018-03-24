@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MovingObject {
 
-	public int wallDamage = 1;
+	public int coalDamage = 1;
 	public int pointsPerFood = 10;
 	public int pointsPerSoda = 20;
 	public float restartLevelDelay = 1f;
@@ -60,9 +60,9 @@ public class Player : MovingObject {
 
 	protected override void OnCantMove<T>(T component)
 	{
-		Wall hitWall = component as Wall;
-//		hitWall.DamageWall(wallDamage);
-//		animator.SetTrigger("playerChop");
+		Coal hitCoal = component as Coal;
+        hitCoal.DamageCoal(coalDamage);
+		animator.SetTrigger("playerChop");
 	}
 
 	private void Restart()
@@ -86,13 +86,15 @@ public class Player : MovingObject {
 		}
 		else if(other.tag == "Food")
 		{
-			food += pointsPerFood;
-			other.gameObject.SetActive(false);
+            food += pointsPerFood;
+       
+            //other.gameObject.SetActive(false);
 		}
 		else if(other.tag == "Soda")
 		{
 			food += pointsPerSoda;
-			other.gameObject.SetActive(false);
+            
+           // other.gameObject.SetActive(false);
 		}
 	}
 

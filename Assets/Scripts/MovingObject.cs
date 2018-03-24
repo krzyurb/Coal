@@ -43,6 +43,7 @@ public abstract class MovingObject : MonoBehaviour {
 		}
 
 		boxCollider.enabled = false;
+
 		hit = Physics2D.Linecast (start, end, blockingLayer);
 		boxCollider.enabled = true;
 
@@ -76,17 +77,18 @@ public abstract class MovingObject : MonoBehaviour {
 		}
 
 		T hitComponent = hit.transform.GetComponent <T> ();
+        Coal hitCoal = hit.transform.GetComponent<Coal>();
 		Enemy enemyComponent = hit.transform.GetComponent<Enemy> ();
 		Player myComponent = GetComponent <Player> ();
 		Enemy myEnemyComponent = GetComponent <Enemy> ();
 		Wall wallComponent = hit.transform.GetComponent <Wall> ();
 
-		if (!canMove && hitComponent != null && enemyComponent == null) {
-			OnCantMove (hitComponent);
+		if (!canMove && hitCoal != null && enemyComponent == null) {
+			OnCantMove (hitCoal);
 		}
-
+        
 		if (!canMove && myEnemyComponent != null && wallComponent != null) {
-			EnemyHitWall (wallComponent);
+            EnemyHitWall (wallComponent);
 		}
 
 		if (!canMove && myComponent != null && enemyComponent != null) {
