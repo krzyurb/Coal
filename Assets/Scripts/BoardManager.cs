@@ -114,7 +114,7 @@ public class BoardManager : MonoBehaviour {
 		TracksAtTop ();
 		CarAtTop ();
 
-		CoalAtRandom (1, 2);
+		CoalAtRandom (10, 22);
         ObjectAtRandom(wallObstacle, 1, 2);
 	}
 
