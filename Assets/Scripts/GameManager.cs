@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
-	
+
 	public static GameManager instance = null;
 	public BoardManager boardScript;
 	public float turnDelay = 0.00f;
@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour {
 
 	private List<Enemy> enemies;
 	private bool enemiesMoving;
+  public float levelStartDelay = 2f;
+  private bool doingSetup = true;
+  private GameObject levelImage;
 
 	void Awake () {
 		if (instance == null)
@@ -24,9 +27,14 @@ public class GameManager : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 		enemies = new List<Enemy>();
 		SceneManager.activeSceneChanged += OnSceneLoaded;
-		
-//		boardScript = GetComponent<BoardManager> ();
-//		InitGame ();
+
+		boardScript = GetComponent<BoardManager> ();
+		InitGame ();
+	}
+
+	void OnLevelWasLoaded(int index) {
+		level++;
+		InitGame();
 	}
 
 	void OnSceneLoaded (Scene previousScene, Scene newScene) {
@@ -34,41 +42,48 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void InitGame () {
+    doingSetup = true;
+    Invoke("HideLevelImage", levelStartDelay);
 		enemies.Clear ();
 		boardScript.SetupScene (level);
 	}
 
-    public void GameOver()
-    {
-        enabled = false;
+  void HideLevelImage() {
+    doingSetup = false;
+  }
+
+  public void GameOver() {
+    enabled = false;
+  }
+
+  public void AddEnemyToList (Enemy script) {
+    enemies.Add (script);
+  }
+
+
+  void Update () {
+    // Debug.Log("playersTurn || enemiesMoving "+ (playersTurn || enemiesMoving));
+    if (playersTurn || enemiesMoving || doingSetup) {
+      return;
+    }
+    StartCoroutine (MoveEnemies ());
+  }
+
+  IEnumerator MoveEnemies() {
+    Debug.Log("MOVE ENEMIES");
+    enemiesMoving = true;
+    yield return new WaitForSeconds (turnDelay);
+    Debug.Log(enemies.Count);
+    if (enemies.Count == 0) {
+      yield return new WaitForSeconds (turnDelay);
     }
 
-	public void AddEnemyToList (Enemy script) {
-		enemies.Add (script);
-	}
+    for (int i = 0; i < enemies.Count; i++) {
+      enemies [i].MoveEnemy ();
+      yield return new WaitForSeconds (enemies[i].moveTime);
+    }
 
-
-	void Update () {
-		if (playersTurn || enemiesMoving) {
-			return;
-		}
-
-		StartCoroutine (MoveEnemies ());
-	}
-
-	IEnumerator MoveEnemies() {
-		enemiesMoving = true;
-		yield return new WaitForSeconds (turnDelay);
-		if (enemies.Count == 0) {
-			yield return new WaitForSeconds (turnDelay);
-		}
-
-		for (int i = 0; i < enemies.Count; i++) {
-//			enemies [i].MoveEnemy ();
-			yield return new WaitForSeconds (0.05f);
-		}
-
-		playersTurn = true;
-		enemiesMoving = false;
-	}
+    playersTurn = true;
+    enemiesMoving = false;
+  }
 }

@@ -22,13 +22,13 @@ public class BoardManager : MonoBehaviour {
 
 	public GameObject   floorTile;
 	public GameObject[] wallTiles;
+	public GameObject[] enemyTiles;
 
 	public GameObject   leftGateTile;
 	public GameObject   centerGateTile;
 	public GameObject   rightGateTile;
 
 	public GameObject   coal;
-	public GameObject   enemy;
 	public GameObject   trackTile;
 
 	public GameObject   railCarUp;
@@ -100,7 +100,7 @@ public class BoardManager : MonoBehaviour {
 		for(int i = 0; i < objectCount; i++) {
 			Vector3 randomPosition = RandomPositions();
 			Instantiate (tile, randomPosition, Quaternion.identity);
-		}		
+		}
 	}
 
 	void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum) {
@@ -121,8 +121,6 @@ public class BoardManager : MonoBehaviour {
 		CarAtTop ();
 
 		ObjectAtRandom (coal, 1, 10);
-
-		ObjectAtRandom (enemy, 1, 10);
-
+		LayoutObjectAtRandom (enemyTiles, 1, 3);
 	}
 }
