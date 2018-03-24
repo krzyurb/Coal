@@ -62,9 +62,6 @@ MonoBehaviour:
   - {fileID: 1873542366747414, guid: 6980d57ca245247778eb0adcf6806217, type: 2}
   enemyTiles:
   - {fileID: 1087878625974098, guid: bb168c7cfb04049b088a40f8e68fd916, type: 2}
-  - {fileID: 1087878625974098, guid: bb168c7cfb04049b088a40f8e68fd916, type: 2}
-  - {fileID: 1087878625974098, guid: bb168c7cfb04049b088a40f8e68fd916, type: 2}
-  - {fileID: 1087878625974098, guid: bb168c7cfb04049b088a40f8e68fd916, type: 2}
   leftGateTile: {fileID: 1357340313686300, guid: e6004ec5646e24e88b3d94bb83e413e0,
     type: 2}
   centerGateTile: {fileID: 1934530320372794, guid: acc46aec7c84d4cf699f54e4df234524,
