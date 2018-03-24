@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Coal : MonoBehaviour
 {
-
     public Sprite damageSpriteCoal;
     public int hp = 4;
 

@@ -54,12 +54,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   columns: 8
   rows: 8
-  floorTile: {fileID: 1671505809671828, guid: 16328bd13e6b449499cc9a130decda3e, type: 2}
   wallTiles:
-  - {fileID: 1686205553828870, guid: 30186b6be85eb412296b020f82b32d9e, type: 2}
-  - {fileID: 1139073422995814, guid: ef6e698da4c3241a78482ceed2a2864e, type: 2}
-  - {fileID: 1688548774047982, guid: c19b0455132634399a5f8ecb39f39772, type: 2}
-  - {fileID: 1873542366747414, guid: 6980d57ca245247778eb0adcf6806217, type: 2}
+  - wallTiles:
+    - {fileID: 1686205553828870, guid: 30186b6be85eb412296b020f82b32d9e, type: 2}
+    - {fileID: 1139073422995814, guid: ef6e698da4c3241a78482ceed2a2864e, type: 2}
+    - {fileID: 1688548774047982, guid: c19b0455132634399a5f8ecb39f39772, type: 2}
+    - {fileID: 1873542366747414, guid: 6980d57ca245247778eb0adcf6806217, type: 2}
+    floorTile: {fileID: 1671505809671828, guid: 16328bd13e6b449499cc9a130decda3e,
+      type: 2}
+  - wallTiles:
+    - {fileID: 1143601845139008, guid: 9b3230b89b30dfe4eb4a448524a9d180, type: 2}
+    - {fileID: 1345126635029588, guid: 6144eeddb871bd84182698f5a121bc34, type: 2}
+    - {fileID: 1011739861358972, guid: a02e88f4385670a42816ad2ca5aaa355, type: 2}
+    - {fileID: 1964814024552878, guid: d246cfcf030d3084db7dc9a8b5ca90c5, type: 2}
+    floorTile: {fileID: 1117068324186932, guid: e0a9009018decd34b97464d6cc90996b,
+      type: 2}
+  - wallTiles:
+    - {fileID: 1038495730995538, guid: 40f5b1c0a110a41468227b96ad68cf18, type: 2}
+    - {fileID: 1951986904397038, guid: 75574a57f26923d4e808fb573cf4d063, type: 2}
+    - {fileID: 1095873718879726, guid: b443622a2f6110f44ad83a06177b8462, type: 2}
+    - {fileID: 1122892321478484, guid: 9e5ffbcf436f66349825c5179f650adf, type: 2}
+    floorTile: {fileID: 1833327084212920, guid: e39e8880ede0f3c4a90af5779164459b,
+      type: 2}
   enemyTiles:
   - {fileID: 1087878625974098, guid: bb168c7cfb04049b088a40f8e68fd916, type: 2}
   - {fileID: 1087878625974098, guid: bb168c7cfb04049b088a40f8e68fd916, type: 2}
@@ -91,6 +107,6 @@ MonoBehaviour:
   boardScript: {fileID: 0}
   turnDelay: 0
   playerFoodPoints: 100
-  level: 1
+  level: 0
   playersTurn: 1
   levelStartDelay: 2
