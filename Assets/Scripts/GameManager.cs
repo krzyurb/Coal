@@ -18,19 +18,19 @@ public class GameManager : MonoBehaviour {
     private bool doingSetup = true;
     private GameObject levelImage;
 
-	void Awake () {
-		if (instance == null)
-			instance = this;
-		else if (instance != this)
-			Destroy (gameObject);
+  void Awake () {
+    if (instance == null)
+      instance = this;
+    else if (instance != this)
+      Destroy (gameObject);
 
-		DontDestroyOnLoad(gameObject);
-		enemies = new List<Enemy>();
-		SceneManager.activeSceneChanged += OnSceneLoaded;
+    DontDestroyOnLoad(gameObject);
+    enemies = new List<Enemy>();
+    SceneManager.activeSceneChanged += OnSceneLoaded;
 
-		boardScript = GetComponent<BoardManager> ();
-		InitGame ();
-	}
+    boardScript = GetComponent<BoardManager> ();
+    InitGame ();
+  }
 
 	void OnLevelWasLoaded(int index) {
 		level++;
@@ -76,13 +76,17 @@ public class GameManager : MonoBehaviour {
 
   IEnumerator MoveEnemies() {
     enemiesMoving = true;
+    Debug.Log("enemies.Count  "+ enemies.Count);
     yield return new WaitForSeconds (turnDelay);
     if (enemies.Count == 0) {
       yield return new WaitForSeconds (turnDelay);
     }
 
     for (int i = 0; i < enemies.Count; i++) {
-      enemies [i].MoveEnemy ();
+      Debug.Log("ENEMIES: "+enemies[i]);
+      if(enemies[i] != null) {
+        enemies [i].MoveEnemy ();
+      }
       yield return new WaitForSeconds (0.5f);
     }
 
