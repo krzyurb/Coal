@@ -20,8 +20,7 @@ public class BoardManager : MonoBehaviour {
 	public int columns = 8;
 	public int rows    = 8;
 
-	public GameObject   floorTile;
-	public GameObject[] wallTiles;
+    public WallObject[] wallTiles;
 	public GameObject[] enemyTiles;
 
 	public GameObject   leftGateTile;
@@ -53,18 +52,19 @@ public class BoardManager : MonoBehaviour {
 		}
 	}
 
-	void BoardSetup () {
+	void BoardSetup (int level) {
 		boardHolder = new GameObject ("Board").transform;
-
-		for (int x = -1; x < columns + 1; x++) {
+        for (int x = -1; x < columns + 1; x++) {
 			for (int y = -1; y < rows + 1; y++) {
-				GameObject toInstantiate = floorTile;
+                WallObject wallTilesByLevel = wallTiles[level];
+                GameObject toInstantiate = wallTilesByLevel.floorTile;
 
-				if (x == -1 || x == columns || y == -1 || y == rows) {
-					toInstantiate = wallTiles[Random.Range(0,wallTiles.Length)];
-				}
+                if (x == -1 || x == columns || y == -1 || y == rows) {
+                    GameObject[] wall = wallTilesByLevel.wallTiles;
+                    toInstantiate = wall[Random.Range(0, wall.Length)];
+                }
 
-				if (y == rows) { // dodawanie bramy
+                if (y == rows) { // dodawanie bramy
 					if (x == columns - 3) toInstantiate = leftGateTile; // brama lewa
 					if (x == columns - 2) toInstantiate = centerGateTile; // brama środek
 					if (x == columns - 1) toInstantiate = rightGateTile; // brama prawa
@@ -85,7 +85,7 @@ public class BoardManager : MonoBehaviour {
 
 	void TracksAtTop () {
 		for (int y = 0; y < rows + 1; y++) {
-			if ((rows - y) > 0 && (rows - y) < 7) {
+			if ((rows - y) > 0 && (rows - y) < 5) {
 				Instantiate (trackTile, new Vector3 (columns - 2, y, 0f), Quaternion.identity);
 			}
 		}
@@ -107,7 +107,7 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	public void SetupScene(int level) {
-		BoardSetup ();
+		BoardSetup (level);
 		InitialiseList ();
 
 		TracksAtTop ();
@@ -144,5 +144,12 @@ public class BoardManager : MonoBehaviour {
             Instantiate(tile, randomPosition, Quaternion.identity);
         }
         return objectReservedPositions;
+    }
+
+    [Serializable]
+    public class WallObject
+    {
+        public GameObject[] wallTiles;
+        public GameObject floorTile;
     }
 }
