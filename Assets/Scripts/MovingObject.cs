@@ -17,7 +17,7 @@ public abstract class MovingObject : MonoBehaviour {
 		inverseMoveTime = 1f / moveTime;
 	}
 
-	protected bool Move (int xDir, int yDir, out RaycastHit2D hit, bool checkAndMove) {
+	protected bool Move (int xDir, int yDir, out RaycastHit2D hit) {
 		Vector2 start = transform.position;
 		Vector2 end = start + new Vector2 (xDir, yDir);
 
@@ -46,12 +46,11 @@ public abstract class MovingObject : MonoBehaviour {
 		hit = Physics2D.Linecast (start, end, blockingLayer);
 		boxCollider.enabled = true;
 
-		if (checkAndMove) {
-			StartCoroutine (SmoothMovement (end));
-			return true;
-		}
-
-		return false;
+    if(hit.transform == null) {
+      StartCoroutine (SmoothMovement (end));
+      return true;
+    }
+    return false;
 	}
 
 	protected IEnumerator SmoothMovement (Vector3 end)
@@ -70,7 +69,7 @@ public abstract class MovingObject : MonoBehaviour {
 		where T : Component
 	{
 		RaycastHit2D hit;
-		bool canMove = Move (xDir, yDir, out hit, true);
+		bool canMove = Move (xDir, yDir, out hit);
 
 		if (hit.transform == null) {
 			return;

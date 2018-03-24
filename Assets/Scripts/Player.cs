@@ -97,12 +97,9 @@ public class Player : MovingObject {
 	}
 
 	private void CheckIfGameOver() {
-//		if (food <= 0)
-//			GameManager.instance.GameOver();
 	}
 
   protected override void EnemyAttack <T> (T component) {
-
   }
 
   protected override void EnemyHitWall <T> (T component) {

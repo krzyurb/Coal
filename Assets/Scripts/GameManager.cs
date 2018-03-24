@@ -60,9 +60,7 @@ public class GameManager : MonoBehaviour {
     enemies.Add (script);
   }
 
-
   void Update () {
-    // Debug.Log("playersTurn || enemiesMoving "+ (playersTurn || enemiesMoving));
     if (playersTurn || enemiesMoving || doingSetup) {
       return;
     }
@@ -70,17 +68,15 @@ public class GameManager : MonoBehaviour {
   }
 
   IEnumerator MoveEnemies() {
-    Debug.Log("MOVE ENEMIES");
     enemiesMoving = true;
     yield return new WaitForSeconds (turnDelay);
-    Debug.Log(enemies.Count);
     if (enemies.Count == 0) {
       yield return new WaitForSeconds (turnDelay);
     }
 
     for (int i = 0; i < enemies.Count; i++) {
       enemies [i].MoveEnemy ();
-      yield return new WaitForSeconds (enemies[i].moveTime);
+      yield return new WaitForSeconds (0.5f);
     }
 
     playersTurn = true;
