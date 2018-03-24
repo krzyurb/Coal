@@ -28,6 +28,9 @@ TextureImporter:
     21300042: elementy-sprite_21
     21300044: elementy-sprite_22
     21300046: elementy-sprite_23
+    21300048: elementy-sprite_24
+    21300050: elementy-sprite_25
+    21300052: elementy-sprite_26
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -442,6 +445,48 @@ TextureImporter:
         serializedVersion: 2
         x: 896
         y: 640
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: elementy-sprite_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: elementy-sprite_25
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: elementy-sprite_26
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
         width: 128
         height: 128
       alignment: 0
