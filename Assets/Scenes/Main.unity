@@ -195,14 +195,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1952401257407790, guid: 278f68be8b3124df392c4d844c8bb86f, type: 2}
-      propertyPath: m_Name
-      value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 1952401257407790, guid: 278f68be8b3124df392c4d844c8bb86f, type: 2}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 278f68be8b3124df392c4d844c8bb86f, type: 2}
   m_IsPrefabParent: 0
