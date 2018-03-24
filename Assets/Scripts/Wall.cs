@@ -9,19 +9,19 @@ public class Wall : MonoBehaviour {
 
 	private SpriteRenderer spriteRenderer;
 
-
-
 	// Use this for initialization
 	void Awake () {
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 	}
 
 	public void DamageWall(int loss){
-		spriteRenderer.sprite = dmgSprite;
+		//spriteRenderer.sprite = dmgSprite;
 		hp -= loss;
-		if (hp <= 0)
-			gameObject.SetActive (false);
-	}
+        if (hp <= 0)
+        {
+            //gameObject.SetActive(false);
+        }
+    }
 
 	// Update is called once per frame
 	void Update () {

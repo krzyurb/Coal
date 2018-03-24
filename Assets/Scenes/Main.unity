@@ -156,7 +156,7 @@ Prefab:
     - {fileID: 95904277530268220, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &1043770760
+--- !u!1001 &814750756
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -193,15 +193,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4154061623538470, guid: 278f68be8b3124df392c4d844c8bb86f, type: 2}
       propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1952401257407790, guid: 278f68be8b3124df392c4d844c8bb86f, type: 2}
-      propertyPath: m_Name
-      value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 1952401257407790, guid: 278f68be8b3124df392c4d844c8bb86f, type: 2}
-      propertyPath: m_Layer
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 278f68be8b3124df392c4d844c8bb86f, type: 2}
@@ -286,7 +278,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1186408717
 MonoBehaviour:

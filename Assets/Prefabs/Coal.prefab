@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4606120351183410}
   - component: {fileID: 212786667052272076}
   - component: {fileID: 61363539785081172}
+  - component: {fileID: 114192170639045830}
   m_Layer: 8
   m_Name: Coal
   m_TagString: Untagged
@@ -66,6 +67,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114192170639045830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345433351701768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e2c77096111024f832271db4a14ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageSpriteCoal: {fileID: 21300014, guid: 5896c149752844ed7af06cb2fd592e3d, type: 3}
+  hp: 2
 --- !u!212 &212786667052272076
 SpriteRenderer:
   m_ObjectHideFlags: 1
