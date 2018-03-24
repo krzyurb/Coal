@@ -126,7 +126,6 @@ public class BoardManager : MonoBehaviour {
         {
             int randomIndex = Random.Range(0, gridPositions.Count);
             Vector3 randomPosition = gridPositions[randomIndex];
-            Debug.Log("coal at index: " + randomIndex + " and on position: " + randomPosition);
             gridPositions.RemoveAt(randomIndex);
 
             coalPositions.Add(randomIndex);

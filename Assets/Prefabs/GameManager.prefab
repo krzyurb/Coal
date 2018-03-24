@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4154061623538470}
   - component: {fileID: 114084954719355942}
   - component: {fileID: 114644905881365464}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,6 +76,7 @@ MonoBehaviour:
   railCarUp: {fileID: 1109321101605594, guid: bfccaa3c98e2c4feb9a42ad77e6afaa9, type: 2}
   railCarDown: {fileID: 1614076668481244, guid: b64035849f8c845aab71976eef8b8312,
     type: 2}
+  wallObstacle: {fileID: 0}
 --- !u!114 &114644905881365464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,3 +93,4 @@ MonoBehaviour:
   playerFoodPoints: 100
   level: 1
   playersTurn: 1
+  levelStartDelay: 2
