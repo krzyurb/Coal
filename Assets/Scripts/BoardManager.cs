@@ -34,10 +34,13 @@ public class BoardManager : MonoBehaviour {
 	public GameObject   railCarUp;
 	public GameObject   railCarDown;
 
+    public GameObject wallObstacle;
+
 	private Transform boardHolder;
 	private List <Vector3> gridPositions = new List<Vector3>();
+    private List<int> coalPositions = new List<int>();
 
-	void InitialiseList() {
+    void InitialiseList() {
 		gridPositions.Clear ();
 
 		for (int x = 1; x < columns - 1; x++) {
@@ -92,14 +95,7 @@ public class BoardManager : MonoBehaviour {
 		Instantiate (railCarDown, new Vector3 (columns - 2, (rows - 3), 0f), Quaternion.identity);
 	}
 
-	void ObjectAtRandom(GameObject tile, int minimum, int maximum) {
-		int objectCount = Random.Range (minimum, maximum + 1);
 
-		for(int i = 0; i < objectCount; i++) {
-			Vector3 randomPosition = RandomPositions();
-			Instantiate (tile, randomPosition, Quaternion.identity);
-		}		
-	}
 
 	void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum) {
 		int objectCount = Random.Range (minimum, maximum + 1);
@@ -118,6 +114,35 @@ public class BoardManager : MonoBehaviour {
 		TracksAtTop ();
 		CarAtTop ();
 
-		ObjectAtRandom (coal, 1, 10);
+		CoalAtRandom (10, 22);
+        ObjectAtRandom(wallObstacle, 1, 2);
 	}
+
+    private void CoalAtRandom(int minimum, int maximum)
+    {
+        int objectCount = Random.Range(minimum, maximum + 1);
+        for (int i = 0; i < objectCount; i++)
+        {
+            int randomIndex = Random.Range(0, gridPositions.Count);
+            Vector3 randomPosition = gridPositions[randomIndex];
+            Debug.Log("coal at index: " + randomIndex + " and on position: " + randomPosition);
+            gridPositions.RemoveAt(randomIndex);
+
+            coalPositions.Add(randomIndex);
+            Instantiate(coal, randomPosition, Quaternion.identity);
+        }
+    }
+
+    List<Vector3> ObjectAtRandom(GameObject tile, int minimum, int maximum)
+    {
+        int objectCount = Random.Range(minimum, maximum + 1);
+        List<Vector3> objectReservedPositions = new List<Vector3>();
+        for (int i = 0; i < objectCount; i++)
+        {
+            Vector3 randomPosition = RandomPositions();
+            objectReservedPositions.Add(randomPosition);
+            Instantiate(tile, randomPosition, Quaternion.identity);
+        }
+        return objectReservedPositions;
+    }
 }
