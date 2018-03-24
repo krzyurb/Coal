@@ -4,18 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
-  public static GameManager instance = null;
-  public BoardManager boardScript;
-  public float turnDelay = 0.00f;
-  public int playerFoodPoints = 100;
-  public int level = 1;
-  [HideInInspector] public bool playersTurn = true;
 
-  private List<Enemy> enemies;
-  private bool enemiesMoving;
-  public float levelStartDelay = 2f;
-  private bool doingSetup = true;
-  private GameObject levelImage;
+	public static GameManager instance = null;
+	public BoardManager boardScript;
+	public float turnDelay = 0.00f;
+	public int playerFoodPoints = 100;
+	public int level = 0;
+    [HideInInspector] public bool playersTurn = true;
+
+	private List<Enemy> enemies;
+	private bool enemiesMoving;
+    public float levelStartDelay = 2f;
+    private bool doingSetup = true;
+    private GameObject levelImage;
 
   void Awake () {
     if (instance == null)
@@ -31,21 +32,28 @@ public class GameManager : MonoBehaviour {
     InitGame ();
   }
 
-  void OnLevelWasLoaded(int index) {
-    level++;
-    InitGame();
-  }
+	void OnLevelWasLoaded(int index) {
+		level++;
+        if(level == 3) {
+            level = 0;
+        }
+		InitGame();
+	}
 
-  void OnSceneLoaded (Scene previousScene, Scene newScene) {
-    level++;
-  }
+	void OnSceneLoaded (Scene previousScene, Scene newScene) {
+        level++;
 
-  void InitGame () {
-    doingSetup = true;
-    Invoke("HideLevelImage", levelStartDelay);
-    enemies.Clear ();
-    boardScript.SetupScene (level);
-  }
+        if (level == 3) {
+            level = 0;
+        }
+	}
+
+	void InitGame () {
+        doingSetup = true;
+        //Invoke("HideLevelImage", levelStartDelay);
+		enemies.Clear ();
+		boardScript.SetupScene (level);
+	}
 
   void HideLevelImage() {
     doingSetup = false;
