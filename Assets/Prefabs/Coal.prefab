@@ -9,45 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1686205553828870}
+  m_RootGameObject: {fileID: 1345433351701768}
   m_IsPrefabParent: 1
---- !u!1 &1686205553828870
+--- !u!1 &1345433351701768
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4198919091728050}
-  - component: {fileID: 212314700537358354}
-  - component: {fileID: 114078669613495054}
-  - component: {fileID: 61022073597712060}
+  - component: {fileID: 4606120351183410}
+  - component: {fileID: 212786667052272076}
+  - component: {fileID: 61363539785081172}
+  - component: {fileID: 114192170639045830}
   m_Layer: 8
-  m_Name: Wall01
+  m_Name: Coal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4198919091728050
+--- !u!4 &4606120351183410
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1686205553828870}
+  m_GameObject: {fileID: 1345433351701768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.10598595, y: -0.08700424, z: 0.07961661}
+  m_LocalPosition: {x: 0.77061594, y: 1.3698708, z: -0.13505086}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61022073597712060
+--- !u!61 &61363539785081172
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1686205553828870}
+  m_GameObject: {fileID: 1345433351701768}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -67,25 +67,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114078669613495054
+--- !u!114 &114192170639045830
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1686205553828870}
+  m_GameObject: {fileID: 1345433351701768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65d3ef180fa0245888f121338ded9c0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 87e2c77096111024f832271db4a14ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmgSprite: {fileID: 21300096, guid: e66784ecb248d47b2a484c2a2226e9bd, type: 3}
-  hp: 4
---- !u!212 &212314700537358354
+  damageSpriteCoal: {fileID: 21300014, guid: 5896c149752844ed7af06cb2fd592e3d, type: 3}
+  hp: 2
+--- !u!212 &212786667052272076
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1686205553828870}
+  m_GameObject: {fileID: 1345433351701768}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -111,10 +111,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1554436039
-  m_SortingLayer: 1
+  m_SortingLayerID: 145872809
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 692213d807c34453e8ef382377c2cbc7, type: 3}
+  m_Sprite: {fileID: 21300012, guid: 5896c149752844ed7af06cb2fd592e3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
