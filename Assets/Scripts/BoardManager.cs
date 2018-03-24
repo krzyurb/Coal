@@ -22,17 +22,18 @@ public class BoardManager : MonoBehaviour {
 
 	public GameObject   floorTile;
 	public GameObject[] wallTiles;
+	public GameObject[] enemyTiles;
 
 	public GameObject   leftGateTile;
 	public GameObject   centerGateTile;
 	public GameObject   rightGateTile;
 
-	public GameObject  coal;
-
+	public GameObject   coal;
 	public GameObject   trackTile;
 
 	public GameObject   railCarUp;
 	public GameObject   railCarDown;
+
 
     public GameObject wallObstacle;
 
@@ -95,8 +96,6 @@ public class BoardManager : MonoBehaviour {
 		Instantiate (railCarDown, new Vector3 (columns - 2, (rows - 3), 0f), Quaternion.identity);
 	}
 
-
-
 	void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum) {
 		int objectCount = Random.Range (minimum, maximum + 1);
 
@@ -114,8 +113,10 @@ public class BoardManager : MonoBehaviour {
 		TracksAtTop ();
 		CarAtTop ();
 
-		CoalAtRandom (10, 22);
-        ObjectAtRandom(wallObstacle, 1, 2);
+		ObjectAtRandom (coal, 1, 10);
+		LayoutObjectAtRandom (enemyTiles, 1, 3);
+		// CoalAtRandom (10, 22);
+        // ObjectAtRandom(wallObstacle, 1, 2);
 	}
 
     private void CoalAtRandom(int minimum, int maximum)

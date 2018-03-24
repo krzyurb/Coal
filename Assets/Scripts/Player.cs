@@ -55,8 +55,7 @@ public class Player : MovingObject {
 		base.AttemptMove<T>(xDir, yDir);
 		RaycastHit2D hit;
 		CheckIfGameOver();
-        //CheckIfUserLevelUp(); // init game with new level, enlarge scene
-//		GameManager.instance.playersTurn = false;
+		GameManager.instance.playersTurn = false;
 	}
 
 	protected override void OnCantMove<T>(T component)
@@ -89,7 +88,7 @@ public class Player : MovingObject {
 		{
 			food += pointsPerFood;
 			other.gameObject.SetActive(false);
-		} 
+		}
 		else if(other.tag == "Soda")
 		{
 			food += pointsPerSoda;
@@ -97,9 +96,12 @@ public class Player : MovingObject {
 		}
 	}
 
-	private void CheckIfGameOver()
-	{
-//		if (food <= 0)
-//			GameManager.instance.GameOver();
+	private void CheckIfGameOver() {
 	}
+
+  protected override void EnemyAttack <T> (T component) {
+  }
+
+  protected override void EnemyHitWall <T> (T component) {
+  }
 }
