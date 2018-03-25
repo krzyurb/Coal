@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour {
 
 	void InitGame () {
         doingSetup = true;
-        //Invoke("HideLevelImage", levelStartDelay);
+        Invoke("HideLevelImage", levelStartDelay);
 		enemies.Clear ();
 		boardScript.SetupScene (level);
 	}
