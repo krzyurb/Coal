@@ -68,9 +68,6 @@ public class Player : MovingObject {
 
   private void Restart()
   {
-//    Application.LoadLevel(Application.loadedLevel);
-//		Destroy(this.gameObject);
-//		Destroy (this);
 		GameManager.instance.InitGame ();
   }
 

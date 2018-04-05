@@ -117,19 +117,10 @@ public class BoardManager : MonoBehaviour {
 	public void SetupScene(int level) {
 		Destroy (GameObject.Find ("Board"));
 
-
-		if (level <= 8)
-			columns = rows = 8;
+		if (level <= 6)
+			columns = rows = 6;
 		else
-			columns = rows = level;
-		
-		Debug.Log ("PLANSZA" + columns);
-		
-//		columns = ((int) 10 + (0.10 * level));
-//		rows    = (int) Mathf.Log(6f, 4f);
-
-//		columns = 10;
-//		rows = 10;
+			columns = rows = 5 + (int)(0.5 * level);
 
 		BoardSetup (level);
 		InitialiseList ();

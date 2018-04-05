@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 1993717500529618}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c25afb320e3ba4a35af4b91c5758d1f4, type: 2}
+  m_Controller: {fileID: 9100000, guid: b38b286c2b144ab4aab63802d45d904e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -121,7 +121,8 @@ MonoBehaviour:
   blockingLayer:
     serializedVersion: 2
     m_Bits: 256
-  wallDamage: 1
+  coalDamage: 1
+  damage: 1
   pointsPerFood: 10
   pointsPerSoda: 20
   restartLevelDelay: 1
