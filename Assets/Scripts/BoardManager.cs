@@ -33,6 +33,7 @@ public class BoardManager : MonoBehaviour {
 	public GameObject   railCarUp;
 	public GameObject   railCarDown;
 
+	public GameObject   player;
 
     public GameObject wallObstacle;
 
@@ -54,6 +55,7 @@ public class BoardManager : MonoBehaviour {
 
 	void BoardSetup (int level) {
 		boardHolder = new GameObject ("Board").transform;
+
         for (int x = -1; x < columns + 1; x++) {
 			for (int y = -1; y < rows + 1; y++) {
                 WallObject wallTilesByLevel = wallTiles[level];
@@ -86,14 +88,17 @@ public class BoardManager : MonoBehaviour {
 	void TracksAtTop () {
 		for (int y = 0; y < rows + 1; y++) {
 			if ((rows - y) > 0 && (rows - y) < 5) {
-				Instantiate (trackTile, new Vector3 (columns - 2, y, 0f), Quaternion.identity);
+				GameObject instance = Instantiate (trackTile, new Vector3 (columns - 2, y, 0f), Quaternion.identity);
+				instance.transform.SetParent(boardHolder);
 			}
 		}
 	}
 
 	void CarAtTop () {
-		Instantiate (railCarUp,  new Vector3 (columns - 2, (rows - 2), 0f), Quaternion.identity);
-		Instantiate (railCarDown, new Vector3 (columns - 2, (rows - 3), 0f), Quaternion.identity);
+		GameObject instance1 = Instantiate (railCarUp,  new Vector3 (columns - 2, (rows - 2), 0f), Quaternion.identity);
+		instance1.transform.SetParent(boardHolder);
+		GameObject instance2 = Instantiate (railCarDown, new Vector3 (columns - 2, (rows - 3), 0f), Quaternion.identity);
+		instance2.transform.SetParent(boardHolder);
 	}
 
 	void LayoutObjectAtRandom(GameObject[] tileArray, int minimum, int maximum) {
@@ -102,21 +107,25 @@ public class BoardManager : MonoBehaviour {
 		for(int i = 0; i < objectCount; i++) {
 			Vector3 randomPosition = RandomPositions();
 			GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
-			Instantiate (tileChoice, randomPosition, Quaternion.identity);
+			GameObject instance = Instantiate (tileChoice, randomPosition, Quaternion.identity);
+			instance.transform.SetParent(boardHolder);
 		}
 	}
 
 	public void SetupScene(int level) {
+		Destroy (GameObject.Find ("Board"));
 		BoardSetup (level);
 		InitialiseList ();
+
+	
+		ObjectAtRandom (coal, 1, 10);
+		LayoutObjectAtRandom (enemyTiles, 1, 3);
 
 		TracksAtTop ();
 		CarAtTop ();
 
-		ObjectAtRandom (coal, 1, 10);
-		LayoutObjectAtRandom (enemyTiles, 1, 3);
-		// CoalAtRandom (10, 22);
-        // ObjectAtRandom(wallObstacle, 1, 2);
+		GameObject instance = Instantiate (player, new Vector3 (columns - 3, rows - 1, 0f), Quaternion.identity);
+		instance.transform.SetParent(boardHolder);
 	}
 
     private void CoalAtRandom(int minimum, int maximum)
@@ -129,7 +138,8 @@ public class BoardManager : MonoBehaviour {
             gridPositions.RemoveAt(randomIndex);
 
             coalPositions.Add(randomIndex);
-            Instantiate(coal, randomPosition, Quaternion.identity);
+			GameObject instance = Instantiate(coal, randomPosition, Quaternion.identity);
+			instance.transform.SetParent(boardHolder);
         }
     }
 
@@ -141,7 +151,8 @@ public class BoardManager : MonoBehaviour {
         {
             Vector3 randomPosition = RandomPositions();
             objectReservedPositions.Add(randomPosition);
-            Instantiate(tile, randomPosition, Quaternion.identity);
+			GameObject instance = Instantiate(tile, randomPosition, Quaternion.identity);
+			instance.transform.SetParent(boardHolder);
         }
         return objectReservedPositions;
     }

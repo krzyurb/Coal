@@ -18,39 +18,39 @@ public class GameManager : MonoBehaviour {
     private bool doingSetup = true;
     private GameObject levelImage;
 
-  void Awake () {
-    if (instance == null)
-      instance = this;
-    else if (instance != this)
-      Destroy (gameObject);
+	void Awake () {
+		if (instance == null)
+		  instance = this;
+		else if (instance != this)
+		  Destroy (gameObject);
 
-    DontDestroyOnLoad(gameObject);
-    enemies = new List<Enemy>();
-    SceneManager.activeSceneChanged += OnSceneLoaded;
+		DontDestroyOnLoad(gameObject);
+		enemies = new List<Enemy>();
+		SceneManager.activeSceneChanged += OnSceneLoaded;
 
-    boardScript = GetComponent<BoardManager> ();
-    InitGame ();
-  }
+		boardScript = GetComponent<BoardManager> ();
+		InitGame ();
+	}
 
 	void OnLevelWasLoaded(int index) {
 		level++;
-        if(level == 3) {
-            level = 0;
-        }
+	    if(level == 3) {
+	        level = 0;
+	    }
 		InitGame();
 	}
 
 	void OnSceneLoaded (Scene previousScene, Scene newScene) {
-        level++;
+	    level++;
 
-        if (level == 3) {
-            level = 0;
-        }
+	    if (level == 3) {
+	        level = 0;
+	    }
 	}
 
-	void InitGame () {
-        doingSetup = true;
-        Invoke("HideLevelImage", levelStartDelay);
+	public void InitGame () {
+	    doingSetup = true;
+	    Invoke("HideLevelImage", levelStartDelay);
 		enemies.Clear ();
 		boardScript.SetupScene (level);
 	}
