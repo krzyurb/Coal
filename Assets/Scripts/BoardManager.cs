@@ -40,6 +40,7 @@ public class BoardManager : MonoBehaviour {
 	private Transform boardHolder;
 	private List <Vector3> gridPositions = new List<Vector3>();
     private List<int> coalPositions = new List<int>();
+	private int levelID;
 
     void InitialiseList() {
 		gridPositions.Clear ();
@@ -55,10 +56,11 @@ public class BoardManager : MonoBehaviour {
 
 	void BoardSetup (int level) {
 		boardHolder = new GameObject ("Board").transform;
+		levelID = Random.Range (0, 2);
 
         for (int x = -1; x < columns + 1; x++) {
 			for (int y = -1; y < rows + 1; y++) {
-                WallObject wallTilesByLevel = wallTiles[level];
+				WallObject wallTilesByLevel = wallTiles[levelID];
                 GameObject toInstantiate = wallTilesByLevel.floorTile;
 
                 if (x == -1 || x == columns || y == -1 || y == rows) {
@@ -114,6 +116,21 @@ public class BoardManager : MonoBehaviour {
 
 	public void SetupScene(int level) {
 		Destroy (GameObject.Find ("Board"));
+
+
+		if (level <= 8)
+			columns = rows = 8;
+		else
+			columns = rows = level;
+		
+		Debug.Log ("PLANSZA" + columns);
+		
+//		columns = ((int) 10 + (0.10 * level));
+//		rows    = (int) Mathf.Log(6f, 4f);
+
+//		columns = 10;
+//		rows = 10;
+
 		BoardSetup (level);
 		InitialiseList ();
 

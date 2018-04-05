@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 	public BoardManager boardScript;
 	public float turnDelay = 0.00f;
 	public int playerFoodPoints = 100;
-	public int level = 0;
+	public int level = 1;
     [HideInInspector] public bool playersTurn = true;
 
 	private List<Enemy> enemies;
@@ -34,25 +34,26 @@ public class GameManager : MonoBehaviour {
 
 	void OnLevelWasLoaded(int index) {
 		level++;
-	    if(level == 3) {
-	        level = 0;
-	    }
+//	    if(level == 3) {
+//	        level = 0;
+//	    }
 		InitGame();
 	}
 
 	void OnSceneLoaded (Scene previousScene, Scene newScene) {
 	    level++;
 
-	    if (level == 3) {
-	        level = 0;
-	    }
+//	    if (level == 3) {
+//	        level = 0;
+//	    }
 	}
 
 	public void InitGame () {
 	    doingSetup = true;
 	    Invoke("HideLevelImage", levelStartDelay);
 		enemies.Clear ();
-		boardScript.SetupScene (level);
+		boardScript.SetupScene (level++);
+		Debug.Log (level);
 	}
 
   void HideLevelImage() {
