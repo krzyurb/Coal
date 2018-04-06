@@ -2,73 +2,67 @@
 using System.Collections;
 
 public class Enemy : MovingObject {
-  public int playerDamage;
-  private Animator animator;
-  private Transform target;
+	public int playerDamage;
+	private Animator animator;
+	private Transform target;
 	private int skipMove;
 	private GameManager gameManage;
-  public int hp = 4;
+	public int hp = 4;
 
-  void Awake () {
+	void Awake () {
 		gameManage = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 	}
 
-  protected override void Start () {
-    	hp = 4;
-			playerDamage = 20;
+	protected override void Start () {
+		hp = 4;
+		playerDamage = 20;
 
-      GameManager.instance.AddEnemyToList (this);
-      animator = GetComponent<Animator> ();
-      target = GameObject.FindGameObjectWithTag ("Player").transform;
-      base.Start ();
-  }
+		GameManager.instance.AddEnemyToList (this);
+		animator = GetComponent<Animator> ();
+		target = GameObject.FindGameObjectWithTag ("Player").transform;
+		base.Start ();
+	}
 
-  protected override void AttemptMove <T> (int xDir, int yDir) {
-      //Check if skipMove is true, if so set it to false and skip this turn.
+	protected override void AttemptMove <T> (int xDir, int yDir) {
+	  //Check if skipMove is true, if so set it to false and skip this turn.
 		if (skipMove == 1) {
 			skipMove = 0;
 			return;
 		}
 
-      base.AttemptMove <T> (xDir, yDir);
-  		skipMove = Random.Range(0, 2);
-  }
+		base.AttemptMove <T> (xDir, yDir);
+		skipMove = Random.Range (0, 2);
+	}
 
-  public void MoveEnemy () {
-    //Declare variables for X and Y axis move directions, these range from -1 to 1.
-    //These values allow us to choose between the cardinal directions: up, down, left and right.
-    int xDir = 0;
-    int yDir = 0;
+	public void MoveEnemy () {
+		int xDir = 0;
+		int yDir = 0;
 
-    if(Mathf.Abs (target.position.x - transform.position.x) < float.Epsilon)
-        yDir = target.position.y > transform.position.y ? 1 : -1;
-    else
-        xDir = target.position.x > transform.position.x ? 1 : -1;
+		if(Mathf.Abs (target.position.x - transform.position.x) < float.Epsilon)
+			yDir = target.position.y > transform.position.y ? 1 : -1;
+	    else
+	        xDir = target.position.x > transform.position.x ? 1 : -1;
 
-    //Call the AttemptMove function and pass in the generic parameter Player, because Enemy is moving and expecting to potentially encounter a Player
-    AttemptMove <Player> (xDir, yDir);
-  }
+		AttemptMove <Player> (xDir, yDir);
+	}
 
+	protected override void OnCantMove <T> (T component) {
+//	    Player hitplayer = component as Player;
+	    animator.SetTrigger ("enemyAttack");
+//	    hitplayer.LoseFood (playerDamage);
+	    Player targetScript = target.gameObject.GetComponent <Player> ();
+	}
 
-  protected override void OnCantMove <T> (T component) {
-    //Player hitplayer = component as Player;
-    animator.SetTrigger ("enemyAttack");
-    //hitplayer.LoseFood (playerDamage);
-    Player targetScript = target.gameObject.GetComponent <Player> ();
-  }
+	protected override void EnemyHitWall <T> (T component) { }
 
-  protected override void EnemyHitWall <T> (T component) {
-  }
-
-  public void TakeDamage (int damage) {
-    hp -= damage;
+	public void TakeDamage (int damage) {
+		hp -= damage;
 
 		if (hp <= 0) {
 			DestroyObject (gameObject);
 			//gameObject.SetActive (false);
 		}
-  }
+	}
 
-  protected override void EnemyAttack <T> (T component) {
-  }
+	protected override void EnemyAttack <T> (T component) { }
 }

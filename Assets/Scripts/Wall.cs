@@ -9,7 +9,6 @@ public class Wall : MonoBehaviour {
 
 	private SpriteRenderer spriteRenderer;
 
-	// Use this for initialization
 	void Awake () {
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 	}
@@ -17,16 +16,10 @@ public class Wall : MonoBehaviour {
 	public void DamageWall(int loss, Player p){
 		//spriteRenderer.sprite = dmgSprite;
 		hp -= loss;
-        if (hp <= 0)
-        {
+		if (hp <= 0) {
 			p.coal++;
 			Debug.Log ("x");
-            //gameObject.SetActive(false);
-        }
-    }
-
-	// Update is called once per frame
-	void Update () {
-		
+			//gameObject.SetActive(false);
+		}
 	}
 }

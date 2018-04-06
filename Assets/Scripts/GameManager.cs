@@ -10,36 +10,35 @@ public class GameManager : MonoBehaviour {
 	public float turnDelay = 0.00f;
 	public int playerFoodPoints = 100;
 	public int level = 1;
-    [HideInInspector] public bool playersTurn = true;
+	[HideInInspector] public bool playersTurn = true;
 
 	public int coalTotal  = 10;
-
 	private List<Enemy> enemies;
 	private bool enemiesMoving;
-    public float levelStartDelay = 2f;
-    private bool doingSetup = true;
-    private GameObject levelImage;
-
+	public float levelStartDelay = 2f;
+	private bool doingSetup = true;
+	private GameObject levelImage;
+	
 	void Awake () {
 		if (instance == null)
 		  instance = this;
 		else if (instance != this)
 		  Destroy (gameObject);
 
-		DontDestroyOnLoad(gameObject);
-		enemies = new List<Enemy>();
+		DontDestroyOnLoad (gameObject);
+		enemies = new List<Enemy> ();
 		SceneManager.activeSceneChanged += OnSceneLoaded;
 
 		boardScript = GetComponent<BoardManager> ();
 		InitGame ();
 	}
 
-	void OnLevelWasLoaded(int index) {
+	void OnLevelWasLoaded (int index) {
 		level++;
 //	    if(level == 3) {
 //	        level = 0;
 //	    }
-		InitGame();
+		InitGame ();
 	}
 
 	void OnSceneLoaded (Scene previousScene, Scene newScene) {
@@ -52,49 +51,46 @@ public class GameManager : MonoBehaviour {
 
 	public void InitGame () {
 	    doingSetup = true;
-	    Invoke("HideLevelImage", levelStartDelay);
+	    Invoke ("HideLevelImage", levelStartDelay);
 		enemies.Clear ();
 		boardScript.SetupScene (level++);
 		Debug.Log (level);
 	}
 
-  void HideLevelImage() {
-    doingSetup = false;
-  }
+	void HideLevelImage () {
+		doingSetup = false;
+	}
 
-  public void GameOver() {
-		Application.LoadLevel("StartMenu");
+	public void GameOver () {
+		Application.LoadLevel ("StartMenu");
+	}
 
-  }
+	public void AddEnemyToList (Enemy script) {
+		enemies.Add (script);
+	}
 
-  public void AddEnemyToList (Enemy script) {
-    enemies.Add (script);
-  }
+	void Update () {
+		if (playersTurn || enemiesMoving || doingSetup)
+			return;
+		
+		StartCoroutine (MoveEnemies ());
+	}
 
-  void Update () {
-    if (playersTurn || enemiesMoving || doingSetup) {
-      return;
-    }
-    StartCoroutine (MoveEnemies ());
-  }
+	IEnumerator MoveEnemies() {
+	    enemiesMoving = true;
+	    Debug.Log("enemies.Count  "+ enemies.Count);
+	    yield return new WaitForSeconds (turnDelay);
 
-  IEnumerator MoveEnemies() {
-    enemiesMoving = true;
-    Debug.Log("enemies.Count  "+ enemies.Count);
-    yield return new WaitForSeconds (turnDelay);
-    if (enemies.Count == 0) {
-      yield return new WaitForSeconds (turnDelay);
-    }
+		if (enemies.Count == 0)
+			yield return new WaitForSeconds (turnDelay);
+	
+	    for (int i = 0; i < enemies.Count; i++) {
+			if (enemies[i] != null)
+				enemies [i].MoveEnemy ();
+			yield return new WaitForSeconds (0.5f);
+	    }
 
-    for (int i = 0; i < enemies.Count; i++) {
-      Debug.Log("ENEMIES: "+enemies[i]);
-      if(enemies[i] != null) {
-        enemies [i].MoveEnemy ();
-      }
-      yield return new WaitForSeconds (0.5f);
-    }
-
-    playersTurn = true;
-    enemiesMoving = false;
-  }
+	    playersTurn   = true;
+		enemiesMoving = false;
+	}
 }

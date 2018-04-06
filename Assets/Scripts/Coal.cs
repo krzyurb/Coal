@@ -9,23 +9,17 @@ public class Coal : MonoBehaviour {
 
     private SpriteRenderer spriteRenderer;
 
-    // Use this for initialization
-    void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+	void Awake () {
+		spriteRenderer = GetComponent<SpriteRenderer> ();
     }
 
-	public void DamageCoal(int loss, Player p)
-    {
+	public void DamageCoal (int loss, Player p) {
         spriteRenderer.sprite = damageSpriteCoal;
         hp -= loss;
-        if (hp <= 0)
-		{
 
-//			GameManager.instance.coalTotal++;
+        if (hp <= 0) {
 			p.coal+=2;
-            gameObject.SetActive(false);
+            gameObject.SetActive (false);
         }
     }
-
 }
