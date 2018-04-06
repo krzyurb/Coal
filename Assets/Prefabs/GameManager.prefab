@@ -90,6 +90,8 @@ MonoBehaviour:
   railCarDown: {fileID: 1614076668481244, guid: b64035849f8c845aab71976eef8b8312,
     type: 2}
   player: {fileID: 1993717500529618, guid: e8b54f51b33c24938bbf8c3164d42151, type: 2}
+  piwko: {fileID: 1584678493483050, guid: 026e1bec16a9b4a58bec2b2052db011a, type: 2}
+  diament: {fileID: 1760624682373034, guid: f4d6252dee3064253b9ac7ccf803d6c9, type: 2}
   wallObstacle: {fileID: 0}
 --- !u!114 &114644905881365464
 MonoBehaviour:
@@ -107,4 +109,5 @@ MonoBehaviour:
   playerFoodPoints: 100
   level: 0
   playersTurn: 1
+  coalTotal: 10
   levelStartDelay: 2

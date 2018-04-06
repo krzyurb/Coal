@@ -15,12 +15,15 @@ public class Coal : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void DamageCoal(int loss)
+	public void DamageCoal(int loss, Player p)
     {
         spriteRenderer.sprite = damageSpriteCoal;
         hp -= loss;
         if (hp <= 0)
-        {
+		{
+
+//			GameManager.instance.coalTotal++;
+			p.coal+=2;
             gameObject.SetActive(false);
         }
     }

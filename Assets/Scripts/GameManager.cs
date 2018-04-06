@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
 	public int level = 1;
     [HideInInspector] public bool playersTurn = true;
 
+	public int coalTotal  = 10;
+
 	private List<Enemy> enemies;
 	private bool enemiesMoving;
     public float levelStartDelay = 2f;
@@ -61,7 +63,8 @@ public class GameManager : MonoBehaviour {
   }
 
   public void GameOver() {
-    enabled = false;
+		Application.LoadLevel("StartMenu");
+
   }
 
   public void AddEnemyToList (Enemy script) {

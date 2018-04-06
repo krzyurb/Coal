@@ -35,6 +35,9 @@ public class BoardManager : MonoBehaviour {
 
 	public GameObject   player;
 
+	public GameObject   piwko;
+	public GameObject   diament;
+
     public GameObject wallObstacle;
 
 	private Transform boardHolder;
@@ -125,9 +128,15 @@ public class BoardManager : MonoBehaviour {
 		BoardSetup (level);
 		InitialiseList ();
 
-	
-		ObjectAtRandom (coal, 1, 10);
-		LayoutObjectAtRandom (enemyTiles, 1, 3);
+		if (level <= 6) {
+			ObjectAtRandom (coal, 1, 5);
+			LayoutObjectAtRandom (enemyTiles, 1, 2);
+		} else {
+			ObjectAtRandom (coal, 1, rows*2);
+			ObjectAtRandom (piwko, 1, 3);
+			ObjectAtRandom (diament, 0, 1);
+			LayoutObjectAtRandom (enemyTiles, 1, rows/2);
+		}
 
 		TracksAtTop ();
 		CarAtTop ();

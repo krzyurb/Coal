@@ -14,11 +14,13 @@ public class Wall : MonoBehaviour {
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 	}
 
-	public void DamageWall(int loss){
+	public void DamageWall(int loss, Player p){
 		//spriteRenderer.sprite = dmgSprite;
 		hp -= loss;
         if (hp <= 0)
         {
+			p.coal++;
+			Debug.Log ("x");
             //gameObject.SetActive(false);
         }
     }
