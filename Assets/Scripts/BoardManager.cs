@@ -17,61 +17,67 @@ public class BoardManager : MonoBehaviour {
 		}
 	}
 
-	public int columns = 8;
-	public int rows    = 8;
-
-    public WallObject[] wallTiles;
-	public GameObject[] enemyTiles;
-
-	public GameObject leftGateTile;
-	public GameObject centerGateTile;
-	public GameObject rightGateTile;
-
-	public GameObject coal;
-	public GameObject trackTile;
-
-	public GameObject railCarUp;
-	public GameObject railCarDown;
-
-	public GameObject player;
-
-	public GameObject piwko;
-	public GameObject diament;
-
-    public GameObject wallObstacle;
-
-	private Transform boardHolder;
-	private List <Vector3> gridPositions = new List<Vector3>();
-    private List<int> coalPositions = new List<int>();
-	private int levelID;
-
-    void InitialiseList() {
-		gridPositions.Clear ();
-
-		for (int x = 1; x < columns - 1; x++) {
-			for (int y = 1; y < rows - 1; y++) {
-				if (x == columns - 2 && ((rows - y) > 0 && (rows - y) < 7)) { }
-				else
-					gridPositions.Add (new Vector3 (x, y, 0f));
-			}
-		}
+	[Serializable]
+	public class WallObject {
+		public GameObject[] wallTiles;
+		public GameObject   floorTile;
 	}
 
-	void BoardSetup (int level) {
+	private int columns;
+	private int rows;
+
+	public GameObject player;
+    public WallObject[] wallTiles;
+	public GameObject[] enemyTiles;
+	public GameObject  leftGateTile;
+	public GameObject  centerGateTile;
+	public GameObject  rightGateTile;
+	public GameObject  trackTile;
+	public GameObject  railCarUp;
+	public GameObject  railCarDown;
+	public GameObject  coal;
+	public GameObject  piwko;
+	public GameObject  diament;
+
+	private Transform boardHolder;
+	private List <Vector3> gridPositions = new List<Vector3> ();
+
+	public void SetupScene (int level) {
+		BoardSetup (level);
+		InitialiseGridPositionsList ();
+
+		if (level <= 6) {
+			PlaceCoalAtRandomPositions (1, 5);
+			PlaceObjectsAtRandomPositions (enemyTiles, 1, 2);
+		} else {
+			PlaceCoalAtRandomPositions (1, rows * 2);
+			PlaceObjectAtRandomPositions (piwko, 1, 3);
+			PlaceObjectAtRandomPositions (diament, 0, 1);
+			PlaceObjectsAtRandomPositions (enemyTiles, 1, rows / 2);
+		}
+
+		GameObject instance = Instantiate (player, new Vector3 (columns - 3, rows - 1, 0f), Quaternion.identity);
+		instance.transform.SetParent (boardHolder);
+	}
+		
+	private void BoardSetup (int level) {
+		Destroy (GameObject.Find ("Board"));
+		SetBoardSize (level);
+
 		boardHolder = new GameObject ("Board").transform;
-		levelID = Random.Range (0, 2);
+		int levelType = Random.Range (0, 2);
 
-	    for (int x = -1; x < columns + 1; x++) {
+		for (int x = -1; x < columns + 1; x++) {
 			for (int y = -1; y < rows + 1; y++) {
-				WallObject wallTilesByLevel = wallTiles[levelID];
-	            GameObject toInstantiate 	= wallTilesByLevel.floorTile;
+				WallObject wallTilesByLevel = wallTiles[levelType];
+				GameObject toInstantiate 	= wallTilesByLevel.floorTile;
 
-                if (x == -1 || x == columns || y == -1 || y == rows) {
-                    GameObject[] wall = wallTilesByLevel.wallTiles;
-                    toInstantiate     = wall[Random.Range(0, wall.Length)];
-                }
+				if (x == -1 || x == columns || y == -1 || y == rows) {
+					GameObject[] wall = wallTilesByLevel.wallTiles;
+					toInstantiate     = wall[Random.Range(0, wall.Length)];
+				}
 
-                if (y == rows) {
+				if (y == rows) {
 					if (x == columns - 3) toInstantiate = leftGateTile;
 					if (x == columns - 2) toInstantiate = centerGateTile;
 					if (x == columns - 1) toInstantiate = rightGateTile;
@@ -79,6 +85,38 @@ public class BoardManager : MonoBehaviour {
 
 				GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity);
 				instance.transform.SetParent(boardHolder);
+			}
+		}
+
+		CreateTracksTiles ();
+		CreateCarTiles ();
+	}
+
+	private void SetBoardSize (int level) {
+		if (level <= 6)
+			columns = rows = 6;
+		else
+			columns = rows = 5 + (int)(0.5 * level);
+	}
+
+	void CreateTracksTiles () {
+		for (int y = 0; y < rows + 1; y++)
+			if ((rows - y) > 0 && (rows - y) < 5)
+				Instantiate (trackTile, new Vector3 (columns - 2, y, 0f), Quaternion.identity).transform.SetParent(boardHolder);
+	}
+
+	void CreateCarTiles () {
+		Instantiate (railCarUp,   new Vector3 (columns - 2, (rows - 2), 0f), Quaternion.identity).transform.SetParent(boardHolder);
+		Instantiate (railCarDown, new Vector3 (columns - 2, (rows - 3), 0f), Quaternion.identity).transform.SetParent(boardHolder);
+	}
+
+	void InitialiseGridPositionsList () {
+		gridPositions.Clear ();
+
+		for (int x = 1; x < columns - 1; x++) {
+			for (int y = 1; y < rows - 1; y++) {
+				if (!(x == columns - 2 && ((rows - y) > 0 && (rows - y) < 7)) && !(x == columns - 3 && y == rows - 2)) // TODO: Make it cleaner
+					gridPositions.Add (new Vector3 (x, y, 0f));
 			}
 		}
 	}
@@ -90,63 +128,8 @@ public class BoardManager : MonoBehaviour {
 
 		return randomPosition;
 	}
-
-	void TracksAtTop () {
-		for (int y = 0; y < rows + 1; y++) {
-			if ((rows - y) > 0 && (rows - y) < 5) {
-				GameObject instance = Instantiate (trackTile, new Vector3 (columns - 2, y, 0f), Quaternion.identity);
-				instance.transform.SetParent(boardHolder);
-			}
-		}
-	}
-
-	void CarAtTop () {
-		GameObject instance1 = Instantiate (railCarUp,   new Vector3 (columns - 2, (rows - 2), 0f), Quaternion.identity);
-		instance1.transform.SetParent(boardHolder);
-		GameObject instance2 = Instantiate (railCarDown, new Vector3 (columns - 2, (rows - 3), 0f), Quaternion.identity);
-		instance2.transform.SetParent(boardHolder);
-	}
-
-	void LayoutObjectAtRandom (GameObject[] tileArray, int minimum, int maximum) {
-		int objectCount = Random.Range (minimum, maximum + 1);
-
-		for (int i = 0; i < objectCount; i++) {
-			Vector3 randomPosition = RandomPositions ();
-			GameObject tileChoice  = tileArray[Random.Range (0, tileArray.Length)];
-			GameObject instance    = Instantiate (tileChoice, randomPosition, Quaternion.identity);
-			instance.transform.SetParent (boardHolder);
-		}
-	}
-
-	public void SetupScene (int level) {
-		Destroy (GameObject.Find ("Board"));
-
-		if (level <= 6)
-			columns = rows = 6;
-		else
-			columns = rows = 5 + (int)(0.5 * level);
-
-		BoardSetup (level);
-		InitialiseList ();
-
-		if (level <= 6) {
-			ObjectAtRandom (coal, 1, 5);
-			LayoutObjectAtRandom (enemyTiles, 1, 2);
-		} else {
-			ObjectAtRandom (coal, 1, rows * 2);
-			ObjectAtRandom (piwko, 1, 3);
-			ObjectAtRandom (diament, 0, 1);
-			LayoutObjectAtRandom (enemyTiles, 1, rows / 2);
-		}
-
-		TracksAtTop ();
-		CarAtTop ();
-
-		GameObject instance = Instantiate (player, new Vector3 (columns - 3, rows - 1, 0f), Quaternion.identity);
-		instance.transform.SetParent (boardHolder);
-	}
-
-    private void CoalAtRandom (int minimum, int maximum) {
+		
+    private void PlaceCoalAtRandomPositions (int minimum, int maximum) {
         int objectCount = Random.Range (minimum, maximum + 1);
 
         for (int i = 0; i < objectCount; i++) {
@@ -154,28 +137,32 @@ public class BoardManager : MonoBehaviour {
             Vector3 randomPosition = gridPositions[randomIndex];
             gridPositions.RemoveAt (randomIndex);
 
-            coalPositions.Add (randomIndex);
-			GameObject instance = Instantiate (coal, randomPosition, Quaternion.identity);
-			instance.transform.SetParent (boardHolder);
+			Instantiate (coal, randomPosition, Quaternion.identity).transform.SetParent (boardHolder);
         }
     }
 
-    List<Vector3> ObjectAtRandom (GameObject tile, int minimum, int maximum) {
+	void PlaceObjectsAtRandomPositions (GameObject[] tileArray, int minimum, int maximum) {
+		int objectCount = Random.Range (minimum, maximum + 1);
+
+		for (int i = 0; i < objectCount; i++) {
+			Vector3 randomPosition = RandomPositions ();
+			GameObject tileChoice  = tileArray[Random.Range (0, tileArray.Length)];
+			Instantiate (tileChoice, randomPosition, Quaternion.identity).transform.SetParent (boardHolder);
+		}
+	}
+
+	List<Vector3> PlaceObjectAtRandomPositions (GameObject gameObject, int minimum, int maximum) {
         int objectCount = Random.Range (minimum, maximum + 1);
         List<Vector3> objectReservedPositions = new List<Vector3> ();
-        for (int i = 0; i < objectCount; i++)
-        {
-            Vector3 randomPosition = RandomPositions ();
-            objectReservedPositions.Add (randomPosition);
-			GameObject instance = Instantiate (tile, randomPosition, Quaternion.identity);
-			instance.transform.SetParent (boardHolder);
-        }
-        return objectReservedPositions;
-    }
 
-    [Serializable]
-    public class WallObject {
-        public GameObject[] wallTiles;
-        public GameObject floorTile;
+        for (int i = 0; i < objectCount; i++) {
+			int randomIndex = Random.Range (0, gridPositions.Count);
+			Vector3 randomPosition = gridPositions[randomIndex];
+			gridPositions.RemoveAt (randomIndex);
+
+			Instantiate (gameObject, randomPosition, Quaternion.identity).transform.SetParent (boardHolder);
+        }
+
+        return objectReservedPositions;
     }
 }
