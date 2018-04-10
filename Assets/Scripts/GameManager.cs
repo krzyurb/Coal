@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour {
 		else if (instance != this)
 			Destroy (gameObject);
 
-		DontDestroyOnLoad (gameObject);
 		enemies = new List<Enemy> ();
 		SceneManager.activeSceneChanged += OnSceneLoaded;
 
@@ -53,7 +52,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void GameOver () {
-		Application.LoadLevel ("StartMenu");
+		SceneManager.LoadScene ("StartMenu");
 	}
 
 	public void AddEnemyToList (Enemy script) {
