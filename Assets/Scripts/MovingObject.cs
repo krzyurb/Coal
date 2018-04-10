@@ -69,28 +69,24 @@ public abstract class MovingObject : MonoBehaviour {
 		RaycastHit2D hit;
 		bool canMove = Move (xDir, yDir, out hit);
 
-		if (hit.transform == null) {
+		if (hit.transform == null)
 			return;
-		}
 
 		T hitComponent = hit.transform.GetComponent <T> ();
-		Coal hitCoal = hit.transform.GetComponent<Coal>();
+		Coal hitCoal = hit.transform.GetComponent<Coal> ();
 		Enemy enemyComponent = hit.transform.GetComponent<Enemy> ();
 		Player myComponent = GetComponent <Player> ();
 		Enemy myEnemyComponent = GetComponent <Enemy> ();
 		Wall wallComponent = hit.transform.GetComponent <Wall> ();
 
-		if (!canMove && hitCoal != null && enemyComponent == null) {
+		if (!canMove && hitCoal != null && enemyComponent == null)
 			OnCantMove (hitCoal);
-		}
 
-		if (!canMove && myEnemyComponent != null && wallComponent != null) {
+		if (!canMove && myEnemyComponent != null && wallComponent != null)
 			EnemyHitWall (wallComponent);
-		}
 
-		if (!canMove && myComponent != null && enemyComponent != null) {
+		if (!canMove && myComponent != null && enemyComponent != null)
 			EnemyAttack (enemyComponent);
-		}
 	}
 
 	protected abstract void OnCantMove <T> (T component)
