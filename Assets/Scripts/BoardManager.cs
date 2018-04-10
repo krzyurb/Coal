@@ -47,13 +47,13 @@ public class BoardManager : MonoBehaviour {
 		InitialiseGridPositionsList ();
 
 		if (level <= 6) {
-			PlaceCoalAtRandomPositions (1, 5);
-			PlaceObjectsAtRandomPositions (enemyTiles, 1, 2);
+			PlaceCoalAtRandomPositions (2, 5);
+			PlaceObjectsAtRandomPositions (enemyTiles, 0, 2);
 		} else {
-			PlaceCoalAtRandomPositions (1, rows * 2);
-			PlaceObjectAtRandomPositions (piwko, 1, 3);
-			PlaceObjectAtRandomPositions (diament, 0, 1);
-			PlaceObjectsAtRandomPositions (enemyTiles, 1, rows / 2);
+			PlaceCoalAtRandomPositions ((int)(rows * rows * 0.1), (int)((rows - 1) * (rows - 1) * 0.35) - 4);
+			PlaceObjectAtRandomPositions (piwko, 0, (int)(rows / 3));
+			PlaceObjectAtRandomPositions (diament, 1, rows);
+			PlaceObjectsAtRandomPositions (enemyTiles, 1, (int)(rows / 3));
 		}
 
 		GameObject instance = Instantiate (player, new Vector3 (columns - 3, rows - 1, 0f), Quaternion.identity);

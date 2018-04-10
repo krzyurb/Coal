@@ -93,10 +93,10 @@ public class Player : MovingObject {
 			Invoke("Restart", restartLevelDelay);
 			enabled = false;
 		} else if(other.tag == "Piwko") {
-			movePoints += 6;
+			movePoints += 11;
 	        other.gameObject.SetActive (false);
 	    } else if(other.tag == "Diament") {
-			movePoints += 11;
+			movePoints += 6;
 			other.gameObject.SetActive (false);
 	    }
 	}

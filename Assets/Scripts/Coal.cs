@@ -18,7 +18,8 @@ public class Coal : MonoBehaviour {
         hp -= loss;
 
         if (hp <= 0) {
-			p.coal+=2;
+			p.coal += 2;
+			p.movePoints -= 1;
             gameObject.SetActive (false);
         }
     }
