@@ -36,7 +36,8 @@ public class Player : MovingObject {
 	}
 
 	void Update () {
-		GameObject.Find ("CoalText").GetComponent<Text> ().text = (GameManager.instance.coalTotal + coal).ToString();
+		string coalNum = (GameManager.instance.coalTotal + coal < 0) ? "0" : (GameManager.instance.coalTotal + coal).ToString ();
+		GameObject.Find ("CoalText").GetComponent<Text> ().text = coalNum;
 		GameObject.Find ("LifeText").GetComponent<Text> ().text = ((int)(GameManager.instance.coalTotal/5f)).ToString();
 		GameObject.Find ("MoveText").GetComponent<Text> ().text = movePoints.ToString();
 
