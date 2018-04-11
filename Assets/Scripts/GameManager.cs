@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -30,13 +31,14 @@ public class GameManager : MonoBehaviour {
 		InitGame ();
 	}
 
+
 	void OnLevelWasLoaded (int index) {
-		level++;
+//		level++;
 		InitGame ();
 	}
 
 	void OnSceneLoaded (Scene previousScene, Scene newScene) {
-	    level++;
+//	    level++;
 	}
 
 	public void InitGame () {
@@ -60,6 +62,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update () {
+		GameObject.Find ("DayText").GetComponent<Text> ().text = (GameManager.instance.level - 1).ToString ();
+
 		if (playersTurn || enemiesMoving || doingSetup)
 			return;
 		
