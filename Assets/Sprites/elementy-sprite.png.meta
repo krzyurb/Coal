@@ -31,6 +31,8 @@ TextureImporter:
     21300048: elementy-sprite_24
     21300050: elementy-sprite_25
     21300052: elementy-sprite_26
+    21300054: elementy-sprite_27
+    21300056: elementy-sprite_28
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -72,9 +74,8 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spritePixelsToUnits: 128
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -486,6 +487,34 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: elementy-sprite_27
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 512
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: elementy-sprite_28
+      rect:
+        serializedVersion: 2
+        x: 512
         y: 512
         width: 128
         height: 128
