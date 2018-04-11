@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Update () {
-		GameObject.Find ("DayText").GetComponent<Text> ().text = (GameManager.instance.level - 1).ToString ();
+		GameObject.Find ("DayText").GetComponent<Text> ().text = (GameManager.instance.level - 2).ToString ();
 
 		if (playersTurn || enemiesMoving || doingSetup)
 			return;
