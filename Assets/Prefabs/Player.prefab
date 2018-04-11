@@ -204,13 +204,12 @@ MonoBehaviour:
     m_Bits: 256
   coalDamage: 1
   damage: 1
-  pointsPerFood: 10
-  pointsPerSoda: 20
   restartLevelDelay: 1
   coal: 0
   movePoints: 0
   stepSound: {fileID: 8300000, guid: 28670043986784145957e704fd3e388a, type: 3}
   hitSound: {fileID: 8300000, guid: 1e462a54c9bca49d3a6ecd72717adf54, type: 3}
+  attackSound: {fileID: 8300000, guid: 8895c16739e644db583b6a4b6e6d02b0, type: 3}
   pointSound: {fileID: 8300000, guid: 908f152867956470595d1419256bec79, type: 3}
   piwkoSound: {fileID: 8300000, guid: b048781355df64258ae51d731fe3f2b4, type: 3}
   failSound: {fileID: 8300000, guid: e983e5f369f61439b887599973cb0058, type: 3}

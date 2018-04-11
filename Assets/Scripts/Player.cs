@@ -15,12 +15,14 @@ public class Player : MovingObject {
 	private AudioSource audioSource;
 	public AudioClip stepSound;
 	public AudioClip hitSound;
+	public AudioClip attackSound;
 	public AudioClip pointSound;
 	public AudioClip piwkoSound;
 	public AudioClip failSound;
 	public AudioClip gameOverSound;
 
 	private bool isPressed = false;
+	private int drunkPoints = 0;
 
 	public Text coalText;
 	public Text moveText;
@@ -70,6 +72,14 @@ public class Player : MovingObject {
 
 	protected override void AttemptMove<T> (int xDir, int yDir) {
 		movePoints--;
+
+		if (drunkPoints > 0) {
+			drunkPoints--;
+
+			xDir *= (-1);
+			yDir *= (-1);
+		}
+		
 		base.AttemptMove<T> (xDir, yDir);
 		RaycastHit2D hit;
 		CheckIfGameOver();
@@ -100,6 +110,7 @@ public class Player : MovingObject {
 		} else if(other.tag == "Piwko") {
 			audioSource.PlayOneShot (piwkoSound);
 			movePoints += 11;
+			drunkPoints += Random.Range (4, 5);
 	        other.gameObject.SetActive (false);
 	    } else if(other.tag == "Diament") {
 			audioSource.PlayOneShot (pointSound);
@@ -112,19 +123,20 @@ public class Player : MovingObject {
 		if (movePoints <= 0) {
 			audioSource.PlayOneShot (failSound);
 			GameManager.instance.coalTotal -= 5;
+			drunkPoints = 0;
 			Invoke ("Restart", restartLevelDelay);
 			enabled = false;
 		}
 
 		if (GameManager.instance.coalTotal < 0) {
 			audioSource.PlayOneShot (gameOverSound);
-			Invoke ("GameOver", 5000f);
-			GameManager.instance.GameOver ();
+			Invoke ("GameOver", 1f);
 		}
 	}
 
 	protected override void EnemyAttack <T> (T component) {
 		Enemy baddie = component as Enemy;
+		audioSource.PlayOneShot (attackSound);
 		animator.SetTrigger ("playerChop");
 		movePoints -= 2;
 		baddie.TakeDamage (damage);
