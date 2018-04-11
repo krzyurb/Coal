@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 61334960820055442}
   - component: {fileID: 50901397322918670}
   - component: {fileID: 114350779805752184}
+  - component: {fileID: 82946614707030102}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -89,6 +90,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
+--- !u!82 &82946614707030102
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1993717500529618}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.808
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 124
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95904277530268220
 Animator:
   serializedVersion: 3
@@ -126,6 +207,14 @@ MonoBehaviour:
   pointsPerFood: 10
   pointsPerSoda: 20
   restartLevelDelay: 1
+  coal: 0
+  movePoints: 0
+  stepSound: {fileID: 8300000, guid: 28670043986784145957e704fd3e388a, type: 3}
+  hitSound: {fileID: 8300000, guid: 1e462a54c9bca49d3a6ecd72717adf54, type: 3}
+  pointSound: {fileID: 8300000, guid: 908f152867956470595d1419256bec79, type: 3}
+  piwkoSound: {fileID: 8300000, guid: b048781355df64258ae51d731fe3f2b4, type: 3}
+  failSound: {fileID: 8300000, guid: e983e5f369f61439b887599973cb0058, type: 3}
+  gameOverSound: {fileID: 8300000, guid: ad012bc5b51064e9fb3d943eb19c2a62, type: 3}
   coalText: {fileID: 0}
   moveText: {fileID: 0}
 --- !u!212 &212851278179754656

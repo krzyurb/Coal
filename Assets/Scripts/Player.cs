@@ -7,12 +7,18 @@ public class Player : MovingObject {
 
 	public int coalDamage = 1;
 	public int damage = 1;
-	public int pointsPerFood = 10;
-	public int pointsPerSoda = 20;
 	public float restartLevelDelay = 1f;
 	private Animator animator;
 	public int coal;
 	public int movePoints;
+
+	private AudioSource audioSource;
+	public AudioClip stepSound;
+	public AudioClip hitSound;
+	public AudioClip pointSound;
+	public AudioClip piwkoSound;
+	public AudioClip failSound;
+	public AudioClip gameOverSound;
 
 	private bool isPressed = false;
 
@@ -20,6 +26,7 @@ public class Player : MovingObject {
 	public Text moveText;
 
 	protected override void Start () {
+		audioSource = GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		coal = 0;
 	
@@ -67,17 +74,14 @@ public class Player : MovingObject {
 		RaycastHit2D hit;
 		CheckIfGameOver();
 		GameManager.instance.playersTurn = false;
+		audioSource.PlayOneShot (stepSound);
 	}
 
 	protected override void OnCantMove<T> (T component) {
 		Coal hitCoal = component as Coal;
 		hitCoal.DamageCoal (coalDamage, this);
 		animator.SetTrigger ("playerChop");
-//		movePoints -= 1;
-	}
-
-	private void Restart () {
-		GameManager.instance.InitGame ();
+		audioSource.PlayOneShot (hitSound);
 	}
 
 	public void LoseFood (int loss) {
@@ -94,9 +98,11 @@ public class Player : MovingObject {
 			Invoke("Restart", restartLevelDelay);
 			enabled = false;
 		} else if(other.tag == "Piwko") {
+			audioSource.PlayOneShot (piwkoSound);
 			movePoints += 11;
 	        other.gameObject.SetActive (false);
 	    } else if(other.tag == "Diament") {
+			audioSource.PlayOneShot (pointSound);
 			movePoints += 6;
 			other.gameObject.SetActive (false);
 	    }
@@ -104,12 +110,15 @@ public class Player : MovingObject {
 
 	private void CheckIfGameOver ()	{
 		if (movePoints <= 0) {
+			audioSource.PlayOneShot (failSound);
 			GameManager.instance.coalTotal -= 5;
 			Invoke ("Restart", restartLevelDelay);
 			enabled = false;
 		}
 
 		if (GameManager.instance.coalTotal < 0) {
+			audioSource.PlayOneShot (gameOverSound);
+			Invoke ("GameOver", 5000f);
 			GameManager.instance.GameOver ();
 		}
 	}
@@ -122,4 +131,12 @@ public class Player : MovingObject {
 	}
 
 	protected override void EnemyHitWall <T> (T component) { }
+
+	private void Restart () {
+		GameManager.instance.InitGame ();
+	}
+
+	private void GameOver () {
+		GameManager.instance.GameOver ();
+	}
 }
